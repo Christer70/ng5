@@ -1,0 +1,34 @@
+<div class="container color-dark">
+  <div class="col">
+    <p>Place an order</p>
+  </div>
+  <div class="col">
+    <p>Number of orders ({{ itemCount }})</p>
+  </div>
+</div>
+<div class="container color-light" [@orders]="orders.length">
+  <div class="col">
+    <p class="sm">Use this form below to place an order. Remember to fill in all the details.</p>
+
+    <form>
+      <input type="text" class="txt" name="name" placeholder="Name.." [(ngModel)]="nameText"/>
+      <input type="number" class="txt" name="phonenumber" placeholder="Phone number.." [(ngModel)]="phonenumberText"/>
+      <input type="email" name="email" class="txt" placeholder="Email.." [(ngModel)]="emailText"/>
+      <input type="text" class="txt" name="currentaddress" placeholder="Current address.." [(ngModel)]="currentAddressText"/>
+      <input type="text" class="txt" name="newaddress" placeholder="New address.." [(ngModel)]="newAddressText"/>
+      <select name="servicetype" [(ngModel)]="serviceText">
+        <option value="moving" selected>Moving</option>
+        <option value="packing">Packing</option>
+        <option value="cleaning">Cleaning</option>
+      </select>
+      <input type="datetime-local" class="date" name="dateofservice" placeholder="Date of service.." [(ngModel)]="dateText"/>
+      <textarea rows="4" cols="50" name="note" class="txtarea" placeholder="Note.." [(ngModel)]="noteText"></textarea>
+      <input type="submit" class="btn" [value]="btnText" (click)="addUpdateItem()"/>
+    </form>
+  </div>
+  <div class="col">
+    <p class="life-container" *ngFor="let order of orders; let i = index">
+      {{ order.Name | json }} <span style="float:right"><span name="delete"  (click)="editItem(i)">edit</span> | <span name="delete" (click)="removeItem(i)">X</span></span>
+    </p>
+  </div>
+</div>
